@@ -1,0 +1,74 @@
+# PhalanxOS core package manifest
+# Base approach: Debian Live Build with packages sourced from Debian repositories where possible.
+profile: core
+base: debian-live-build
+packages:
+  - name: linux-image-amd64
+    component: Linux kernel
+    source: debian
+    required: true
+    notes: Debian metapackage for the amd64 Linux kernel.
+  - name: build-essential
+    component: GNU userland
+    source: debian
+    required: true
+    notes: Pulls in GNU compiler and common development userland tools.
+  - name: coreutils
+    component: GNU userland
+    source: debian
+    required: true
+    notes: GNU file, shell, and text utilities.
+  - name: bash
+    component: GNU userland
+    source: debian
+    required: true
+    notes: Default interactive shell candidate.
+  - name: busybox
+    component: BusyBox
+    source: debian
+    required: true
+    notes: Compact utility suite useful for recovery environments.
+  - name: wayland-protocols
+    component: Wayland
+    source: debian
+    required: true
+    notes: Protocol definitions for Wayland compositors and clients.
+  - name: niri
+    component: Niri
+    source: debian-or-external
+    required: true
+    notes: Prefer Debian package when available; otherwise package from upstream with license review.
+  - name: kde-plasma-desktop
+    component: KDE Plasma
+    source: debian
+    required: true
+    notes: Plasma desktop baseline.
+  - name: nextcloud-desktop
+    component: Nextcloud client
+    source: debian
+    required: true
+    notes: Desktop sync client.
+  - name: torbrowser-launcher
+    component: Tor Browser
+    source: debian
+    required: true
+    notes: Launcher/downloader; verify Tor Project signatures during installation.
+  - name: onionshare
+    component: OnionShare
+    source: debian
+    required: true
+    notes: Anonymous file sharing and receiving tool.
+  - name: rclone
+    component: rclone
+    source: debian
+    required: true
+    notes: Cloud storage sync tool.
+  - name: pcloud
+    component: pCloud integration
+    source: external
+    required: false
+    notes: pCloud official binaries may require separate redistribution review before bundling.
+licensing_notes:
+  - Prefer Debian main packages for default ISO content.
+  - External binaries, including pCloud components, must be reviewed before redistribution.
+  - Tor Browser should be obtained and verified through trusted Tor Project mechanisms rather than repackaged casually.

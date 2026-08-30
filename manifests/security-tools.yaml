@@ -1,0 +1,46 @@
+# Optional PhalanxOS security tools manifest
+# These tools are for authorized security testing, education, and defensive validation only.
+profile: optional-security-tools
+base: debian-live-build
+install_by_default: false
+packages:
+  - name: nmap
+    component: Nmap
+    source: debian
+    redistributable_default_iso: candidate
+    notes: Network discovery and auditing tool; safe examples should use owned lab networks.
+  - name: metasploit-framework
+    component: Metasploit Framework
+    source: external-or-kali
+    redistributable_default_iso: no
+    notes: Exploit framework; do not bundle until license, update, and responsible-use policy are reviewed.
+  - name: burpsuite
+    component: Burp Suite
+    source: debian-nonfree-or-vendor
+    redistributable_default_iso: no
+    notes: Community/Professional editions have distinct terms; require user-initiated installation.
+  - name: john
+    component: John the Ripper
+    source: debian
+    redistributable_default_iso: candidate
+    notes: Password auditing tool; documentation must emphasize consent and offline lab use.
+  - name: hashcat
+    component: Hashcat
+    source: debian
+    redistributable_default_iso: candidate
+    notes: Password recovery/auditing tool; GPU dependencies may require non-free drivers.
+  - name: aircrack-ng
+    component: Aircrack-ng
+    source: debian
+    redistributable_default_iso: candidate
+    notes: Wireless auditing suite; examples must use owned test networks only.
+  - name: hydra
+    component: Hydra
+    source: debian
+    redistributable_default_iso: candidate
+    notes: Login auditing tool; do not include brute-force workflows against third-party services.
+licensing_notes:
+  - This manifest is optional and must not be installed by default in the first desktop ISO.
+  - Metasploit Framework and Burp Suite require additional redistribution and edition-specific license review.
+  - Tools from Debian non-free, vendor downloads, or third-party repositories require explicit provenance records.
+  - Some tools may be subject to local law, export rules, workplace policies, or service terms.

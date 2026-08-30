@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name="" />
+  <group name="General">
+    <entry name="enabledModules" type="StringList">
+      <default>systemStatus,aiAssistant,securityTools,networkStatus,privacyTor,syncStatus,socialNotifications</default>
+    </entry>
+    <entry name="accentColor" type="String">
+      <default>#dc143c</default>
+    </entry>
+    <entry name="secondaryAccentColor" type="String">
+      <default>#ff335f</default>
+    </entry>
+    <entry name="transparency" type="Double">
+      <default>0.88</default>
+      <min>0.35</min>
+      <max>1.0</max>
+    </entry>
+    <entry name="panelPosition" type="String">
+      <default>left</default>
+    </entry>
+    <entry name="animationIntensity" type="Int">
+      <default>2</default>
+      <min>0</min>
+      <max>3</max>
+    </entry>
+  </group>
+</kcfg>

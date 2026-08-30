@@ -1,0 +1,18 @@
+{
+  "KPlugin": {
+    "Id": "org.phalanxos.plasma.startsidebar",
+    "Name": "PhalanxOS Start Sidebar",
+    "Description": "Cyberpunk-inspired Start Menu sidebar for the PhalanxOS desktop shell.",
+    "Icon": "start-here-kde",
+    "Version": "0.1.0",
+    "License": "GPL-3.0-or-later",
+    "Authors": [
+      {
+        "Name": "PhalanxOS Contributors"
+      }
+    ],
+    "Category": "Application Launchers"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "KPackageStructure": "Plasma/Applet"
+}

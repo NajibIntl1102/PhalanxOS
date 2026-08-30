@@ -3,42 +3,98 @@
 profile: optional-security-tools
 base: debian-live-build
 install_by_default: false
+policy: docs/security-tools-policy.md
+install_profiles:
+  default_desktop:
+    install_by_default: true
+    description: Everyday defensive and privacy-safe desktop tools only.
+  privacy:
+    install_by_default: false
+    description: Opt-in privacy and anonymity workflows with operational-safety notes.
+  security_auditor:
+    install_by_default: false
+    description: Opt-in tools for authorized administration, diagnostics, and defensive validation.
+  advanced_pentesting:
+    install_by_default: false
+    requires_high_risk_gate: true
+    description: Opt-in dual-use tools for authorized labs, ranges, and engagements.
+high_risk_gate:
+  required_for:
+    - metasploit-framework
+    - burpsuite
+    - hashcat
+    - aircrack-ng
+    - hydra
+  warning: >
+    These advanced dual-use tools must be used only for defensive auditing,
+    privacy research, training labs, or systems where the user has explicit
+    authorization. Unauthorized scanning, exploitation, password attacks,
+    wireless attacks, traffic interception, or credential testing may be
+    illegal and harmful.
 packages:
   - name: nmap
     component: Nmap
+    install_profile: security_auditor
     source: debian
-    redistributable_default_iso: candidate
-    notes: Network discovery and auditing tool; safe examples should use owned lab networks.
+    license: Nmap Public Source License / GPL-derived terms; verify Debian copyright metadata
+    redistribution_status: candidate for optional auditor image from Debian repositories
+    default_installation_status: not installed by default
+    high_risk_gate_required: false
+    legal_ethical_note: Scan only networks, hosts, and services the user owns or is explicitly authorized to test.
   - name: metasploit-framework
     component: Metasploit Framework
+    install_profile: advanced_pentesting
     source: external-or-kali
-    redistributable_default_iso: no
-    notes: Exploit framework; do not bundle until license, update, and responsible-use policy are reviewed.
+    license: BSD-style components plus Rapid7 packaging terms; requires version-specific review
+    redistribution_status: not redistributable in default ISO until license, update, and provenance review is complete
+    default_installation_status: not installed by default
+    high_risk_gate_required: true
+    legal_ethical_note: Use only in owned labs, ranges, or client-authorized engagements; do not document unauthorized exploitation playbooks.
   - name: burpsuite
     component: Burp Suite
+    install_profile: advanced_pentesting
     source: debian-nonfree-or-vendor
-    redistributable_default_iso: no
-    notes: Community/Professional editions have distinct terms; require user-initiated installation.
+    license: proprietary edition-specific terms; Community and Professional require separate review
+    redistribution_status: not redistributable in default ISO without edition-specific terms review
+    default_installation_status: not installed by default
+    high_risk_gate_required: true
+    legal_ethical_note: Use only for authorized web application testing; do not intercept third-party traffic without consent.
   - name: john
     component: John the Ripper
+    install_profile: security_auditor
     source: debian
-    redistributable_default_iso: candidate
-    notes: Password auditing tool; documentation must emphasize consent and offline lab use.
+    license: GPL; verify Debian copyright metadata
+    redistribution_status: candidate for optional auditor image from Debian repositories
+    default_installation_status: not installed by default
+    high_risk_gate_required: false
+    legal_ethical_note: Use for offline password auditing of owned password hashes or approved training data only.
   - name: hashcat
     component: Hashcat
+    install_profile: advanced_pentesting
     source: debian
-    redistributable_default_iso: candidate
-    notes: Password recovery/auditing tool; GPU dependencies may require non-free drivers.
+    license: MIT; verify Debian copyright metadata and driver licenses
+    redistribution_status: conditional; core package may be redistributable from Debian, but GPU stacks require separate review
+    default_installation_status: not installed by default
+    high_risk_gate_required: true
+    legal_ethical_note: Use only for password recovery or auditing with explicit authorization; never target third-party credentials.
   - name: aircrack-ng
     component: Aircrack-ng
+    install_profile: advanced_pentesting
     source: debian
-    redistributable_default_iso: candidate
-    notes: Wireless auditing suite; examples must use owned test networks only.
+    license: GPL; verify Debian copyright metadata
+    redistribution_status: candidate for optional advanced profile from Debian repositories after policy review
+    default_installation_status: not installed by default
+    high_risk_gate_required: true
+    legal_ethical_note: Test only owned lab wireless networks or client-authorized environments; comply with radio, privacy, and wiretap laws.
   - name: hydra
     component: Hydra
+    install_profile: advanced_pentesting
     source: debian
-    redistributable_default_iso: candidate
-    notes: Login auditing tool; do not include brute-force workflows against third-party services.
+    license: AGPL/GPL-family; verify Debian copyright metadata
+    redistribution_status: candidate for optional advanced profile from Debian repositories after policy review
+    default_installation_status: not installed by default
+    high_risk_gate_required: true
+    legal_ethical_note: Use only for authorized login control validation; do not run password attacks against public or third-party services.
 licensing_notes:
   - This manifest is optional and must not be installed by default in the first desktop ISO.
   - Metasploit Framework and Burp Suite require additional redistribution and edition-specific license review.

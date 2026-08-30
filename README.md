@@ -36,8 +36,9 @@ Build scaffolding lives in [`build/`](build/), and package selections live in [`
 
 - [`manifests/core.yaml`](manifests/core.yaml) lists core distro components such as the Linux kernel, GNU userland, BusyBox, Wayland, Niri, KDE Plasma, Nextcloud client, Tor Browser support, OnionShare, rclone, and pCloud integration notes.
 - [`manifests/security-tools.yaml`](manifests/security-tools.yaml) lists optional security tools such as Nmap, Metasploit Framework, Burp Suite, John the Ripper, Hashcat, Aircrack-ng, and Hydra.
+- [`docs/security-tools-policy.md`](docs/security-tools-policy.md) defines responsible-use requirements, install profiles, package classification fields, and high-risk onboarding gates for dual-use tooling.
 
-The optional security manifest is not intended for default installation in the first desktop ISO.
+The optional security manifest is not intended for default installation in the first desktop ISO. High-risk tools such as Metasploit, Hydra, Aircrack-ng, Hashcat, and Burp Suite require an explicit opt-in warning before installation.
 
 ## Licensing and redistribution notes
 
